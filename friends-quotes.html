@@ -1,0 +1,401 @@
+<title>The One With 50 Quotes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,500&display=swap');
+
+  :root{
+    --paper: #ECDFC1;
+    --paper-2: #E4D3AC;
+    --ink: #2B1810;
+    --ink-soft: #5A4432;
+    --frame: #F2B22C;
+    --frame-dark: #C98A12;
+    --plum: #6B4E8E;
+    --rust: #C1502E;
+    --sage: #6E7F4E;
+    --tape: #F2E6B8;
+    --shadow: rgba(43, 24, 16, 0.28);
+    --ginger: #E8871B;
+    --ginger-dark: #A9540B;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #241811;
+      --paper-2: #2D2016;
+      --ink: #F1E2C4;
+      --ink-soft: #C9B394;
+      --frame: #F2B22C;
+      --frame-dark: #F4C55C;
+      --plum: #B197D6;
+      --rust: #E38058;
+      --sage: #9CB077;
+      --tape: #3A2E1C;
+      --shadow: rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #241811;
+    --paper-2: #2D2016;
+    --ink: #F1E2C4;
+    --ink-soft: #C9B394;
+    --frame: #F2B22C;
+    --frame-dark: #F4C55C;
+    --plum: #B197D6;
+    --rust: #E38058;
+    --sage: #9CB077;
+    --tape: #3A2E1C;
+    --shadow: rgba(0, 0, 0, 0.55);
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    background:
+      radial-gradient(1200px 600px at 10% -10%, color-mix(in srgb, var(--frame) 10%, transparent), transparent),
+      var(--paper);
+    color: var(--ink);
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    padding: 0 0 6rem;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 2.5rem;
+    text-align: center;
+  }
+
+  .frame{
+    display: inline-block;
+    border: 14px solid var(--frame);
+    border-radius: 4px;
+    padding: 1.6rem 2.4rem;
+    background: color-mix(in srgb, var(--paper) 92%, var(--frame) 8%);
+    box-shadow: 0 18px 0 -6px var(--shadow), 0 2px 10px var(--shadow);
+    transform: rotate(-1deg);
+  }
+
+  .wordmark{
+    font-family: "Alfa Slab One", "Georgia", serif;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+  .wordmark .dot{ color: var(--rust); }
+
+  .kicker{
+    font-family: "Caveat", cursive;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    color: var(--plum);
+    margin: 0.6rem 0 0;
+    transform: rotate(-1deg);
+  }
+
+  .sub{
+    max-width: 42ch;
+    margin: 1.4rem auto 0;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .sub strong{ color: var(--ink); }
+
+  /* ---------- WALL ---------- */
+  .wall{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1rem 1.4rem 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.6rem;
+    align-items: start;
+  }
+
+  .card{
+    margin: 0;
+    padding: 1.3rem 1.3rem 1.1rem;
+    background: var(--paper-2);
+    border-radius: 3px;
+    box-shadow: 0 10px 22px -12px var(--shadow), 0 1px 0 var(--shadow);
+    position: relative;
+    cursor: pointer;
+  }
+
+  .card::before{
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 64px;
+    height: 22px;
+    background: var(--tape);
+    opacity: 0.85;
+    transform: translateX(-50%) rotate(var(--tape-rot, -3deg));
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+
+  .card:nth-child(3n){ transform: rotate(-1.1deg); }
+  .card:nth-child(3n+1){ transform: rotate(0.9deg); }
+  .card:nth-child(3n+2){ transform: rotate(-0.4deg); }
+  .card:nth-child(5n){ --tape-rot: 4deg; }
+
+  .card.tone-yellow{ background: color-mix(in srgb, var(--frame) 24%, var(--paper-2)); }
+  .card.tone-plum{ background: color-mix(in srgb, var(--plum) 16%, var(--paper-2)); }
+  .card.tone-rust{ background: color-mix(in srgb, var(--rust) 14%, var(--paper-2)); }
+  .card.tone-sage{ background: color-mix(in srgb, var(--sage) 14%, var(--paper-2)); }
+
+  .quote{
+    font-size: 1.05rem;
+    line-height: 1.42;
+    margin: 0.4rem 0 0.9rem;
+    text-wrap: pretty;
+  }
+  .quote::before{ content: "\201C"; }
+  .quote::after{ content: "\201D"; }
+
+  .who{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-top: 1px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+    padding-top: 0.55rem;
+  }
+
+  .name{
+    font-family: "Caveat", cursive;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--plum);
+  }
+
+  .num{
+    font-family: "DM Sans", sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+  }
+
+  footer{
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .card{ transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .card:hover{
+      transform: rotate(0deg) translateY(-3px) scale(1.015);
+      box-shadow: 0 16px 26px -14px var(--shadow), 0 1px 0 var(--shadow);
+      z-index: 2;
+    }
+    .card:active{ transform: rotate(0deg) translateY(-1px) scale(0.98); }
+  }
+
+  .card:focus-visible{
+    outline: 3px solid var(--plum);
+    outline-offset: 3px;
+  }
+
+  /* ---------- CAT CONFETTI ---------- */
+  .cat{
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-left: -14px;
+    margin-top: -14px;
+    pointer-events: none;
+    z-index: 80;
+    opacity: 0;
+    animation-name: cat-fall;
+    animation-timing-function: cubic-bezier(.36,.4,.6,1);
+    animation-fill-mode: forwards;
+  }
+  .cat svg{ width: 100%; height: 100%; display: block; }
+
+  @keyframes cat-fall{
+    0%{ transform: translate(0, 0) scale(0.3) rotate(0deg); opacity: 0; }
+    8%{ opacity: 1; }
+    80%{ opacity: 1; }
+    100%{ transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--rot)); opacity: 0; }
+  }
+
+  @media (min-width: 901px){
+    /* 50 cards over 4 columns leaves the last row with 2 - center that pair. */
+    .card:nth-child(49){ grid-column: 2; }
+    .card:nth-child(50){ grid-column: 3; }
+  }
+
+  @media (max-width: 900px){
+    .wall{ grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 520px){
+    .wall{ grid-template-columns: 1fr; }
+    .frame{ padding: 1.2rem 1.4rem; border-width: 10px; }
+  }
+</style>
+
+<div class="hero">
+  <div class="frame">
+    <p class="wordmark">50 LINES<span class="dot">.</span></p>
+    <p class="wordmark" style="font-size: clamp(1.3rem, 3.2vw, 2rem); margin-top: 0.3rem;">FROM THE COUCH AT CENTRAL PERK</p>
+  </div>
+  <p class="kicker">The one with all the quotes</p>
+  <p class="sub">Ten seasons, six friends, one fountain. These are the lines that stuck &mdash; from <strong>Ross</strong>, <strong>Rachel</strong>, <strong>Monica</strong>, <strong>Chandler</strong>, <strong>Joey</strong> and <strong>Phoebe</strong> (plus a couple of unforgettable cameos).</p>
+</div>
+
+<div class="wall" id="wall"></div>
+
+<footer>Pinned to the corkboard from memory, for fans who still know all the words. &#9749;</footer>
+
+<script>
+const quotes = [
+  ["We were on a break!", "Ross"],
+  ["How you doin'?", "Joey"],
+  ["Oh. My. God.", "Janice"],
+  ["Could I BE wearing any more clothes?", "Chandler"],
+  ["PIVOT! PIVOT! PIVOT!", "Ross"],
+  ["Welcome to the real world. It sucks. You're gonna love it.", "Monica"],
+  ["Smelly Cat, Smelly Cat, what are they feeding you?", "Phoebe"],
+  ["It's a moo point. It's like a cow's opinion &mdash; it just doesn't matter. It's moo.", "Joey"],
+  ["Unagi. It's a state of total awareness.", "Ross"],
+  ["No uterus, no opinion.", "Rachel"],
+  ["I make this look good.", "Joey"],
+  ["Regina Phalange.", "Phoebe"],
+  ["FINE! By ME! FINE!", "Ross"],
+  ["My sandwich? MY SANDWICH?!", "Ross"],
+  ["Oh. No no no no no.", "Chandler"],
+  ["Hi, I'm Chandler. I make jokes when I'm uncomfortable.", "Chandler"],
+  ["There's nothing to tell. He's just some guy I work with.", "Rachel"],
+  ["He's her lobster.", "Phoebe"],
+  ["I'm supposed to be the meat!", "Joey"],
+  ["Could this BE any more difficult?", "Chandler"],
+  ["I got off the plane.", "Rachel"],
+  ["Joey doesn't share food.", "Joey"],
+  ["Seven. Seven, Ross.", "Rachel"],
+  ["I'm not great at the advice. Can I interest you in a sarcastic comment?", "Chandler"],
+  ["It's like all my life everyone told me I'm a shoe.", "Phoebe"],
+  ["Grab a spoon.", "Rachel"],
+  ["I take thee, Ross, back.", "Emily"],
+  ["That's not a woman, that's Chandler!", "Joey"],
+  ["I'm fine!", "Ross"],
+  ["We didn't have a break, we were on a break!", "Ross"],
+  ["Oh, honey, oh &mdash; wow.", "Phoebe"],
+  ["I'll be there for you.", "Monica"],
+  ["Could you BE more sarcastic?", "Chandler"],
+  ["Pheebs, you're gonna make me spill my drink.", "Rachel"],
+  ["Y'know, I'm not so good with the advice, so let me sing you a song instead.", "Phoebe"],
+  ["It's not a purse, it's a satchel! Indiana Jones wears one!", "Joey"],
+  ["Rachel, no one is codependent on Ross.", "Monica"],
+  ["Milk. Milk was a bad choice.", "Joey"],
+  ["I wear the pants, and I'm the man, and the world can see me roar!", "Monica"],
+  ["Cheesecake!", "Chandler"],
+  ["I'm a very sexy kitchen.", "Monica"],
+  ["Gunther, can I get a latte?", "Rachel"],
+  ["Could I BE any more Chandler right now?", "Chandler"],
+  ["This is a moo point.", "Joey"],
+  ["We were NOT on a break!", "Ross"],
+  ["I'm breezy! This is me being breezy!", "Ross"],
+  ["Oh, I know!", "Janice"],
+  ["Come on, Ross, everybody gets confused sometimes.", "Phoebe"],
+  ["Diva!", "Joey"],
+  ["Pivot the couch or lose your friends. Your choice.", "Ross"],
+];
+
+const wall = document.getElementById('wall');
+const tones = ["", "tone-yellow", "tone-plum", "tone-rust", "tone-sage"];
+
+quotes.forEach((entry, i) => {
+  const [text, who] = entry;
+  const card = document.createElement('div');
+  card.className = "card " + tones[i % tones.length];
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', 'Quote ' + (i + 1) + ' by ' + who + '. Activate for a surprise.');
+  card.innerHTML =
+    '<p class="quote">' + text + '</p>' +
+    '<div class="who"><span class="name">' + who + '</span>' +
+    '<span class="num">No. ' + String(i + 1).padStart(2, '0') + '</span></div>';
+  wall.appendChild(card);
+});
+
+/* ---------- cat confetti ---------- */
+const catSVG =
+  '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' +
+    '<polygon points="7,15 13,3 18,15" fill="var(--ginger)"/>' +
+    '<polygon points="33,15 27,3 22,15" fill="var(--ginger)"/>' +
+    '<polygon points="8,16 13,6 16,16" fill="var(--ginger-dark)"/>' +
+    '<polygon points="32,16 27,6 24,16" fill="var(--ginger-dark)"/>' +
+    '<circle cx="20" cy="23" r="14" fill="var(--ginger)"/>' +
+    '<path d="M8 21 Q20 27 32 21 Q32 31 20 34 Q8 31 8 21 Z" fill="var(--ginger-dark)" opacity="0.5"/>' +
+    '<circle cx="15" cy="21" r="1.7" fill="#2B1810"/>' +
+    '<circle cx="25" cy="21" r="1.7" fill="#2B1810"/>' +
+    '<polygon points="20,25 17.5,28 22.5,28" fill="#2B1810"/>' +
+    '<path d="M14 30 Q20 34 26 30" stroke="#2B1810" stroke-width="1.5" fill="none" stroke-linecap="round"/>' +
+  '</svg>';
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function spawnCats(){
+  if (prefersReducedMotion) return;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const count = 55;
+
+  for (let i = 0; i < count; i++){
+    const cat = document.createElement('div');
+    cat.className = 'cat';
+    cat.innerHTML = catSVG;
+
+    const startX = Math.random() * vw;
+    const startY = -60 - Math.random() * vh * 0.5;
+    const dx = Math.random() * 220 - 110;
+    const dy = (vh - startY) + 80 + Math.random() * 160;
+    const rot = (Math.random() * 520 - 260).toFixed(0);
+    const size = 20 + Math.random() * 22;
+    const duration = 1700 + Math.random() * 1400;
+    const delay = Math.random() * 500;
+
+    cat.style.left = startX + 'px';
+    cat.style.top = startY + 'px';
+    cat.style.width = size + 'px';
+    cat.style.height = size + 'px';
+    cat.style.animationDuration = duration + 'ms';
+    cat.style.animationDelay = delay + 'ms';
+    cat.style.setProperty('--dx', dx.toFixed(0) + 'px');
+    cat.style.setProperty('--dy', dy.toFixed(0) + 'px');
+    cat.style.setProperty('--rot', rot + 'deg');
+
+    document.body.appendChild(cat);
+    cat.addEventListener('animationend', () => cat.remove());
+    // Fallback: guarantee removal even if the animation is interrupted,
+    // canceled mid-flight, or the browser skips the animationend event.
+    setTimeout(() => cat.remove(), duration + delay + 400);
+  }
+}
+
+wall.addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  spawnCats();
+});
+
+wall.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.card');
+  if (!card) return;
+  e.preventDefault();
+  spawnCats();
+});
+</script>
